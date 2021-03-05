@@ -10,7 +10,7 @@
   <%= error_tag f, :name %>
 
   <%= label f, :date %>
-  <%= textarea f, :date, class: "event-date-selector" %>
+  <%= text_input f, :date, class: "event-date-selector" %>
   <%= error_tag f, :date %>
 
   <%= label f, :description %>
