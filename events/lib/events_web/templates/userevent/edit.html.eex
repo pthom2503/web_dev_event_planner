@@ -1,0 +1,5 @@
+<h1>Edit Userevent</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.userevent_path(@conn, :update, @userevent)) %>
+
+<span><%= link "Back", to: Routes.userevent_path(@conn, :index) %></span>

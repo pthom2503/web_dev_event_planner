@@ -1,0 +1,31 @@
+<h1>Listing Userevent</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Description</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for userevent <- @userevent do %>
+    <tr>
+      <td><%= userevent.name %></td>
+      <td><%= userevent.date %></td>
+      <td><%= userevent.description %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.userevent_path(@conn, :show, userevent) %></span>
+        <span><%= link "Edit", to: Routes.userevent_path(@conn, :edit, userevent) %></span>
+        <span><%= link "Delete", to: Routes.userevent_path(@conn, :delete, userevent), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Event", to: Routes.userevent_path(@conn, :new) %></span>
+<div><%= link "Back", to: "/" %></div>

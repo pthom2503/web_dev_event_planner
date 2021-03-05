@@ -1,0 +1,23 @@
+<p>
+  <span><%= link "Edit", to: Routes.userevent_path(@conn, :edit, @userevent) %></span>
+  <span><%= link "Back", to: Routes.userevent_path(@conn, :index) %></span>
+</p>
+
+<h1>Show Event #<%= @userevent.id %></h1>
+
+<div>
+  <ul>
+    <li>
+      <strong>Name:</strong>
+      <%= @userevent.name %>
+    </li>
+    <li>
+      <strong>Date:</strong>
+      <%= @userevent.date %>
+    </li>
+    <li>
+      <strong>Description:</strong>
+      <%= @userevent.description %>
+    </li>
+  </ul>
+</div>

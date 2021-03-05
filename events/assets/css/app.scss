@@ -1,0 +1,11 @@
+/* This file is for your main application css. */
+@import "bootstrap";
+@import "flatpickr";
+.invalid-feedback {
+  display: block;
+}
+
+.event-date-selector {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+}

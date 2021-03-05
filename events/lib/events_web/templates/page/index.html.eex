@@ -1,0 +1,4 @@
+<%= link("Users", to: Routes.user_path(@conn, :index)) %>
+
+<%= link("Events", to: Routes.userevent_path(@conn, :index)) %>
+
