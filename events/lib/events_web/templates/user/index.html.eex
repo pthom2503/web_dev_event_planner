@@ -1,5 +1,5 @@
 <h1>Listing User</h1>
-
+<! -- taken from lecture tutorial -->
 <table class="table table-striped">
   <thead>
     <tr>
