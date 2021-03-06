@@ -4,7 +4,7 @@
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
-
+<! -- taken bootstrap styling from lecture tutorial -->
   <div class="form-group">
     <%= label f, :name %>
     <%= text_input f, :name, class: "form-control" %>
