@@ -1,5 +1,5 @@
 <h1>Listing Events</h1>
-
+<! -- bootstrap styling taken from lecture tutorial -->
 <table class="table table-striped">
   <thead>
     <tr>
