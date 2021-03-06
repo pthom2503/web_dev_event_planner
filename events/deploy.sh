@@ -7,16 +7,18 @@ export MIX_ENV=prod
 export PORT=4803
 export SECRET_KEY_BASE=insecure
 
-mix deps.get --only prod
-mix compile
-mix ecto.create
-mix ecto.migrate
-
 CFGD=$(readlink -f ~/.config/events)
 
 if [ ! -d "$CFGD" ]; then
     mkdir -p "$CFGD"
 fi
+
+DATABASE_URL=$(cat "$CFGD/postgres")
+export DATABASE_URL
+
+mix deps.get
+mix compile
+
 
 if [ ! -e "$CFGD/base" ]; then
     mix phx.gen.secret > "$CFGD/base"
@@ -30,3 +32,5 @@ npm run deploy --prefix ./assets
 mix phx.digest
 
 mix release
+mix ecto.create
+mix ecto.migrate

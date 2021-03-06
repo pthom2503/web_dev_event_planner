@@ -10,7 +10,8 @@ if [ ! -e "$CFGD/base" ]; then
     exit 1
 fi
 
-DATABASE_URL=""
+DATABASE_URL=$(cat "$CFGD/postgres")
+export DATABASE_URL
 
 SECRET_KEY_BASE=$(cat "$CFGD/base")
 export SECRET_KEY_BASE
