@@ -16,7 +16,8 @@ defmodule EventsWeb.Router do
 
   scope "/", EventsWeb do
     pipe_through :browser
-
+    
+    # based on lecture tutorial code
     get "/", PageController, :index
     resources "/events", UsereventController
     resources "/users", UserController
