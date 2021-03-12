@@ -7,6 +7,7 @@ defmodule Events.Users.User do
     field :email, :string
     field :photo_hash, :string
     has_many :userevents, Events.Userevents.Userevent
+    has_many :comments, Events.Comments.Comment
 
     timestamps()
   end

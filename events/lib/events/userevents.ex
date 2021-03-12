@@ -41,6 +41,9 @@ defmodule Events.Userevents do
     |> Repo.preload(:user)
   end
 
+  def load_comments(%Userevent{} = userevent) do
+    Repo.preload(userevent, [comments: :user])
+  end
 
   @doc """
   Creates a userevent.

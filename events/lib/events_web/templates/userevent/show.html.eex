@@ -27,3 +27,24 @@
     </li>
   </ul>
 </div>
+
+<h2>Add Comment</h2>
+<!-- taken from lecture tutorial code -->
+<%= if have_current_user?(@conn) do %>
+  <%= render(
+    EventsWeb.CommentView,
+    "form.html",
+    changeset: @new_comment,
+    action: Routes.comment_path(@conn, :create)
+  ) %>
+<% end %>
+
+<h2>Comments</h2>
+<%= for comm <- @userevent.comments do %>
+  <div class="card">
+    <div class="card-body">
+      <p>Created by <%= comm.user.name %></p>
+      <p class="card-text"><%= comm.body %></p>
+    </div>
+  </div>
+<% end %>

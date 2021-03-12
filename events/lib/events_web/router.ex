@@ -22,6 +22,7 @@ defmodule EventsWeb.Router do
     resources "/events", UsereventController
     resources "/users", UserController
     get "/users/:id/photo", UserController, :photo
+    resources "/comments", CommentController
     resources "/sessions", SessionController,
       only: [:create, :delete], singleton: true
   end
