@@ -11,6 +11,7 @@ defmodule EventsWeb.SessionController do
       |> redirect(to: Routes.page_path(conn, :index))
     else
       conn
+      |> delete_session(:user_id)
       |> put_flash(:error, "Login failed.")
       |> redirect(to: Routes.page_path(conn, :index))
     end

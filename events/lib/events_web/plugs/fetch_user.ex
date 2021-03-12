@@ -6,9 +6,13 @@ defmodule EventsWeb.Plugs.FetchUser do
 
   def call(conn, _args) do
     user_id = get_session(conn, :user_id) || -1
-    user = Event.Users.get_user(user_id)
+    user = Events.Users.get_user(user_id)
     if user do
-      assign(conn, :current_user, user)
+      token = Phoenix.Token.sign(
+        conn, "user_id", user.id)
+      conn
+      |> assign(:current_user, user)
+      |> assign(:user_token, token)
     else
       assign(conn, :current_user, nil)
     end

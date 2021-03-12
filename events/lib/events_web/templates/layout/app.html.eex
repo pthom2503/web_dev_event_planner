@@ -19,6 +19,7 @@
         </div>
         <%= if @conn.assigns[:current_user] do %>
           <div class="col">
+            <img src="<%= Routes.user_path(@conn, :photo, @current_user) %>" alt="" witdth="50" height="50">
             User: <%= @current_user.name %> |
             <%= link("Logout", to: Routes.session_path(@conn, :delete),
               method: :delete) %>

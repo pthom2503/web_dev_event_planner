@@ -5,6 +5,8 @@ defmodule Events.Users.User do
   schema "user" do
     field :name, :string
     field :email, :string
+    field :photo_hash, :string
+    has_many :userevents, Events.Userevents.Userevent
 
     timestamps()
   end
@@ -12,7 +14,7 @@ defmodule Events.Users.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :email])
-    |> validate_required([:name, :email])
+    |> cast(attrs, [:name, :email, :photo_hash])
+    |> validate_required([:name, :email, :photo_hash])
   end
 end

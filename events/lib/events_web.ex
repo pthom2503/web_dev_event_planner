@@ -23,6 +23,7 @@ defmodule EventsWeb do
 
       import Plug.Conn
       import EventsWeb.Gettext
+      import EventsWeb.Helpers
       alias EventsWeb.Router.Helpers, as: Routes
     end
   end

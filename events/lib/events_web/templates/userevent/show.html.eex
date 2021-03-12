@@ -1,5 +1,7 @@
 <p>
-  <span><%= link "Edit", to: Routes.userevent_path(@conn, :edit, @userevent) %></span>
+  <%= if current_user_is?(@conn, @userevent.user_id) do %>
+    <span><%= link "Edit", to: Routes.userevent_path(@conn, :edit, @userevent) %></span>
+  <% end %>
   <span><%= link "Back", to: Routes.userevent_path(@conn, :index) %></span>
 </p>
 
@@ -10,6 +12,10 @@
     <li>
       <strong>Name:</strong>
       <%= @userevent.name %>
+    </li>
+    <li>
+      <strong>Owner:</strong>
+      <%= @userevent.user.name %>
     </li>
     <li>
       <strong>Date:</strong>

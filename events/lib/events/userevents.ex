@@ -19,6 +19,7 @@ defmodule Events.Userevents do
   """
   def list_userevent do
     Repo.all(Userevent)
+    |> Repo.preload(:user)
   end
 
   @doc """
@@ -35,7 +36,11 @@ defmodule Events.Userevents do
       ** (Ecto.NoResultsError)
 
   """
-  def get_userevent!(id), do: Repo.get!(Userevent, id)
+  def get_userevent!(id) do
+    Repo.get!(Userevent, id)
+    |> Repo.preload(:user)
+  end
+
 
   @doc """
   Creates a userevent.

@@ -10,7 +10,10 @@
     <strong>Email:</strong>
     <%= @user.email %>
   </li>
-
+  <li>
+    <strong>Profile Pic:</strong>
+    <img src="<%= Routes.user_path(@conn, :photo, @user) %>" alt="" width="50" height="50">
+  </li>
 
 
 </ul>

@@ -13,6 +13,7 @@
     <tr>
       <td><%= user.name %></td>
       <td><%= user.email %></td>
+      <td><img src="<%= Routes.user_path(@conn, :photo, user) %>" alt="" width="50" height="50"></td>
 
       <td>
         <span><%= link "Show", to: Routes.user_path(@conn, :show, user) %></span>
@@ -24,5 +25,4 @@
   </tbody>
 </table>
 
-<span><%= link "New User", to: Routes.user_path(@conn, :new) %></span>
 <div><%= link "Back", to: "/" %></div>

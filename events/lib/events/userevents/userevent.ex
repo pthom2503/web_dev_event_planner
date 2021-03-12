@@ -6,14 +6,14 @@ defmodule Events.Userevents.Userevent do
     field :date, :naive_datetime
     field :description, :string
     field :name, :string
-
+    belongs_to :user, Events.Users.User
     timestamps()
   end
 
   @doc false
   def changeset(userevent, attrs) do
     userevent
-    |> cast(attrs, [:name, :date, :description])
-    |> validate_required([:name, :date, :description])
+    |> cast(attrs, [:name, :date, :description, :user_id])
+    |> validate_required([:name, :date, :description, :user_id])
   end
 end
