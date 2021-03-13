@@ -21,6 +21,11 @@ defmodule Events.Comments do
     Repo.all(Comment)
   end
 
+  def invited(user_id, userevent_id) do
+    q = from i in "comments", where: i.user_id == ^user_id and i.userevent_id == ^userevent_id
+    Repo.exists?(q)
+  end
+
   @doc """
   Gets a single comment.
 
@@ -52,7 +57,10 @@ defmodule Events.Comments do
   def create_comment(attrs \\ %{}) do
     %Comment{}
     |> Comment.changeset(attrs)
-    |> Repo.insert()
+    |> Repo.insert(
+      on_conflict: :replace_all,
+      conflict_target: [:userevent_id, :user_id]
+    )
   end
 
   @doc """

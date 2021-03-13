@@ -16,8 +16,12 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :vote %>
-    <%= number_input f, :vote, class: "form-control" %>
+    <%= label f, :Attending %>
+    <%= radio_button(:comment, :vote, "Yes") %>
+    <%= label f, :Not %>
+    <%= radio_button(:comment, :vote, "No") %>
+    <%= label f, :Maybe %>
+    <%= radio_button(:comment, :vote, "Maybe", checked: true) %>
     <%= error_tag f, :vote %>
   </div>
 

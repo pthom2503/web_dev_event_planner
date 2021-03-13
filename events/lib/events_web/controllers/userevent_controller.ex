@@ -64,7 +64,7 @@ defmodule EventsWeb.UsereventController do
     comm = %Events.Comments.Comment{
       userevent_id: userevent.id,
       user_id: current_user_id(conn),
-      vote: 0,
+      vote: "",
     }
     new_comment = Events.Comments.change_comment(comm)
     render(conn, "show.html", userevent: userevent, new_comment: new_comment)

@@ -39,7 +39,7 @@ defmodule Events.Users do
 
   def get_user(id), do: Repo.get(User, id)
 
-  def get_user_by_email(email) do
+  def get_email(email) do
     Repo.get_by(User, email: email)
   end
 
@@ -58,7 +58,9 @@ defmodule Events.Users do
   def create_user(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)
-    |> Repo.insert()
+    |> Repo.insert(
+      on_conflict: {:replace, [:name]},
+      conflict_target: [:email])
   end
 
   @doc """

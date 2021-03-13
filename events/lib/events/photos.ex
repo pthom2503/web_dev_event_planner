@@ -52,9 +52,9 @@ defmodule Events.Photos do
 
   def base_path(hash) do
     # FIXME: Actually make this work
-    #env = Application.get_env(:photo_blog, :env)
+    #env = Application.get_env(:events, :env)
 
-    Path.expand("~/.local/data/photo_blog")
+    Path.expand("~/.local/data/events")
     #|> Path.join("#{env}")
     |> Path.join(String.slice(hash, 0, 2))
     |> Path.join(String.slice(hash, 2, 30))

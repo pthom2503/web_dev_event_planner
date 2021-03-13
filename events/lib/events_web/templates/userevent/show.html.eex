@@ -4,47 +4,97 @@
   <% end %>
   <span><%= link "Back", to: Routes.userevent_path(@conn, :index) %></span>
 </p>
-
-<h1>Show Event #<%= @userevent.id %></h1>
-
-<div>
-  <ul>
-    <li>
-      <strong>Name:</strong>
-      <%= @userevent.name %>
-    </li>
-    <li>
-      <strong>Owner:</strong>
-      <%= @userevent.user.name %>
-    </li>
-    <li>
-      <strong>Date:</strong>
-      <%= @userevent.date %>
-    </li>
-    <li>
-      <strong>Description:</strong>
-      <%= @userevent.description %>
-    </li>
-  </ul>
-</div>
-
-<h2>Add Comment</h2>
-<!-- taken from lecture tutorial code -->
 <%= if have_current_user?(@conn) do %>
-  <%= render(
-    EventsWeb.CommentView,
-    "form.html",
-    changeset: @new_comment,
-    action: Routes.comment_path(@conn, :create)
-  ) %>
-<% end %>
+  <h1>Show Event #<%= @userevent.id %></h1>
 
-<h2>Comments</h2>
-<%= for comm <- @userevent.comments do %>
-  <div class="card">
-    <div class="card-body">
-      <p>Created by <%= comm.user.name %></p>
-      <p class="card-text"><%= comm.body %></p>
-    </div>
+  <div>
+    <ul>
+      <li>
+        <strong>Sharable Link:</strong>
+        <span>http://events.dialnerd.me/events/<%=@userevent.id%></span>
+      </li>
+      <li>
+        <strong>Name:</strong>
+        <%= @userevent.name %>
+      </li>
+      <li>
+        <strong>Owner:</strong>
+        <%= @userevent.user.name %>
+      </li>
+      <li>
+        <strong>Date:</strong>
+        <%= @userevent.date %>
+      </li>
+      <li>
+        <strong>Description:</strong>
+        <%= @userevent.description %>
+      </li>
+    </ul>
+  </div>
+
+  <%= if current_user_is?(@conn, @userevent.user_id) do %>
+    <%= form_for @conn, Routes.comment_path(@conn, :create), fn f -> %>
+            <%= hidden_input f, :userevent, value: @userevent.id %>
+            <%= label f, :email %>
+            <%= text_input f, :email %>
+            <%= error_tag f, :email %>
+            <%= submit "Invite" %>
+    <% end %>
+  <% end %>
+
+  <h2>Add Comment</h2>
+  <!-- taken from lecture tutorial code -->
+    <%= render(
+      EventsWeb.CommentView,
+      "form.html",
+      changeset: @new_comment,
+      action: Routes.comment_path(@conn, :create)
+    ) %>
+  <h2>Comments</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Attending?</th>
+        <th>Comment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for comm <- @userevent.comments do %>
+        <tr>
+          <td>
+            <img src="<%= Routes.user_path(@conn, :photo, comm.user) %>" height="50" width="50">
+          </td>
+          <td>
+            <%= comm.user.name%>
+          </td>
+          <td>
+            <%= comm.user.email%>
+          </td>
+          <td>
+            <%= comm.vote%>
+          </td>
+          <td>
+            <%= comm.body%>
+          </td>
+          <td>
+          <%= if current_user_is?(@conn, comm.user_id) do %>
+            <span><%= link "Edit", to: Routes.comment_path(@conn, :edit, comm) %></span>
+            <span><%= link "Remove", to: Routes.comment_path(@conn, :delete, comm), method: :delete, data: [confirm: "Are you sure?"] %></span>
+          <% else %>
+            <%= if current_user_is?(@conn, @userevent.user_id) do %>
+              <span><%= link "Remove", to: Routes.comment_path(@conn, :delete, comm), method: :delete, data: [confirm: "Are you sure?"] %></span>
+            <% end %>
+          <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div>
+    Welcome! You'll need to sign in or create a user to see events you are invited to
   </div>
 <% end %>

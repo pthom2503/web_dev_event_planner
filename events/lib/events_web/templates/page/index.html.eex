@@ -1,11 +1,12 @@
 <%= if have_current_user?(@conn) do %>
   <div>
-    <%= link "New Event", to: Routes.userevent_path(@conn, :new) %>
-  </div>
-  <div>
     <%= link("Users", to: Routes.user_path(@conn, :index)) %>
   </div>
   <div>
     <%= link("Events", to: Routes.userevent_path(@conn, :index)) %>
+  </div>
+<% else %>
+  <div>
+    Welcome! If you are not already registered, please create a user! Otherwise, log in above
   </div>
 <% end %>

@@ -10,5 +10,7 @@ defmodule Events.Repo.Migrations.CreateUser do
       timestamps()
     end
 
+   create index(:user, [:email], unique: true)
+
   end
 end

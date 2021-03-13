@@ -1,8 +1,11 @@
+<%= if not have_current_user?(@conn) do%>
+  Log in to see this page
+<% else %>
 <h1>Listing Events</h1>
-<! -- bootstrap styling taken from lecture tutorial -->
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Owner Pic</th>
       <th>Name</th>
       <th>Event Owner</th>
       <th>Date</th>
@@ -13,21 +16,25 @@
   </thead>
   <tbody>
 <%= for userevent <- @userevent do %>
+  <%= if is_invited?(@conn, userevent.id, userevent.user_id) do %>
     <tr>
+      <td><img src="<%= Routes.user_path(@conn, :photo, userevent.user) %>" alt="" width="50" height="50"></td>
       <td><%= userevent.name %></td>
       <td><%= userevent.user.name %></td>
       <td><%= userevent.date %></td>
       <td><%= userevent.description %></td>
-
       <td>
         <span><%= link "Show", to: Routes.userevent_path(@conn, :show, userevent) %></span>
-        <span><%= link "Edit", to: Routes.userevent_path(@conn, :edit, userevent) %></span>
-        <span><%= link "Delete", to: Routes.userevent_path(@conn, :delete, userevent), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <%= if current_user_is?(@conn, userevent.user_id) do %>
+          <span><%= link "Edit", to: Routes.userevent_path(@conn, :edit, userevent) %></span>
+        <% end %>
       </td>
     </tr>
+  <% end %>
 <% end %>
   </tbody>
 </table>
 
 <span><%= link "New Event", to: Routes.userevent_path(@conn, :new) %></span>
+<% end %>
 <div><%= link "Back", to: "/" %></div>

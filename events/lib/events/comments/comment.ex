@@ -4,7 +4,7 @@ defmodule Events.Comments.Comment do
 
   schema "comments" do
     field :body, :string
-    field :vote, :integer
+    field :vote, :string
     belongs_to :userevent, Events.Userevents.Userevent
     belongs_to :user, Events.Users.User   
 
